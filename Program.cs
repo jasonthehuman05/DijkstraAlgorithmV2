@@ -20,6 +20,19 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
             startNode = Console.ReadLine();
             Console.Write("Enter end node:\n>> ");
             endNode = Console.ReadLine();
+
+            //Set the start node cost to 0
+            nodeDictionary[startNode].Cost = 0;
+        }
+
+        static void CheckNode(NodeQueue queue, string destNode)
+        {
+            if(queue.Count == 0) { return; } //Since the queue is empty, we can return to the program.
+
+            foreach(Route route in routes.FindAll(rt => rt.From == queue.First.Value.Name)) //Find all routes departing from the first node in t'queue
+            {
+
+            }
         }
 
         static void LoadGraph()

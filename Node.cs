@@ -9,13 +9,13 @@ namespace DijkstraAlgorithmV2
     internal class Node
     {
         public string Name { get; private set; }
-        public double Value { get; set; }
+        public double Cost { get; set; }
         public Node PreviousNode { get; set; }
 
-        public Node(string name, double value = int.MaxValue, Node prevNode = null)
+        public Node(string name, double cost = int.MaxValue, Node prevNode = null)
         {
             Name = name;
-            Value = value;
+            Cost = cost;
             PreviousNode = prevNode;
         }
     }
