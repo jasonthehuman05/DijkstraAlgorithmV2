@@ -15,6 +15,8 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
 
         static void Main(string[] args)
         {
+            LoadGraph();
+
             //Takes in the start and end node names
             Console.Write("Enter start node:\n>> ");
             startNode = Console.ReadLine();
