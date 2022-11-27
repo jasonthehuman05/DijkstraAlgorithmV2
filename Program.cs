@@ -31,8 +31,32 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
 
             foreach(Route route in routes.FindAll(rt => rt.From == queue.First.Value.Name)) //Find all routes departing from the first node in t'queue
             {
+                //Since we don't want to visit nodes repeatedly, we check to see if the chosen node has been checked
+                if (!unvisitedNodes.Contains(route.To))
+                {
+                    continue; //Skip this node
+                }
 
+                double currentPathCost = nodeDictionary[queue.First.Value.Name].Cost + route.Distance; //Calcuate the total dist if we go through this node
+                if (currentPathCost < nodeDictionary[route.To].Cost) //If this is cheaper than the current shortest path to the dest node, update it to match this route
+                {
+                    nodeDictionary[route.To].Cost = currentPathCost;
+                    nodeDictionary[route.To].PreviousNode = nodeDictionary[queue.First.Value.Name];
+                }
+
+                //check if the dest node is in the queue
+                if (!queue.ContainsNode(route.To))
+                {
+                    //As its not in the queue, add it so it can be evaluated
+                    queue.AddToQueue(nodeDictionary[route.To]);
+                }
             }
+
+            //This node has now been checked, so rid it from the queue and the unvisited nodes
+            unvisitedNodes.Remove(queue.First.Value.Name);
+            queue.RemoveFirst();
+
+            CheckNode(queue, destNode);
         }
 
         static void LoadGraph()
