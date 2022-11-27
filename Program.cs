@@ -32,6 +32,8 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
             queue.AddToQueue(nodeDictionary[startNode]);
 
             CheckNode(queue, endNode);
+
+            DisplayPath();
         }
 
         static void CheckNode(NodeQueue queue, string destNode)
@@ -93,6 +95,28 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
 
                 //Add the route to the list of possible routes
                 routes.Add(new Route(from, to, dist));
+            }
+        }
+
+        static void DisplayPath()
+        {
+            List<Node> calculatedPath = new List<Node>();
+
+            Node currentNode = nodeDictionary[endNode];
+
+            while(currentNode != nodeDictionary[startNode]) //Work back through the path until you reach the start
+            {
+                calculatedPath.Add(currentNode);
+                currentNode = currentNode.PreviousNode;
+            }
+
+            calculatedPath.Add(nodeDictionary[startNode]);
+
+            calculatedPath.Reverse(); //flip it so it goes S-E rather than E-S
+
+            foreach(Node node in calculatedPath)
+            {
+                Console.WriteLine($"{node.Name} -- {node.Cost}");
             }
         }
     }
