@@ -23,8 +23,15 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
             Console.Write("Enter end node:\n>> ");
             endNode = Console.ReadLine();
 
+
             //Set the start node cost to 0
             nodeDictionary[startNode].Cost = 0;
+
+            //creates a queue and adds the start node to it
+            NodeQueue queue = new NodeQueue();
+            queue.AddToQueue(nodeDictionary[startNode]);
+
+            CheckNode(queue, endNode);
         }
 
         static void CheckNode(NodeQueue queue, string destNode)
@@ -77,8 +84,8 @@ namespace DijkstraAlgorithmV2 //Dij-kstrer
                 var (from, to, dist) = (param[0], param[1], double.Parse(param[2]));
 
                 //Adds any non-existing nodes to the dict
-                if (nodeDictionary.ContainsKey(from)){ nodeDictionary.Add(from, new Node(from)); }
-                if (nodeDictionary.ContainsKey(to)){ nodeDictionary.Add(to, new Node(to)); }
+                if (!nodeDictionary.ContainsKey(from)){ nodeDictionary.Add(from, new Node(from)); }
+                if (!nodeDictionary.ContainsKey(to)){ nodeDictionary.Add(to, new Node(to)); }
 
                 //Adds the nodes to the HashTable as unvisited nodes. Duplicates are ignored
                 unvisitedNodes.Add(from);
